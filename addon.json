@@ -1,0 +1,9 @@
+{
+	"title"		:	"My Game Additions",
+	"type"		:	"ServerContent",
+	"tags"		:	[ "fun", "build" ],
+	"ignore"	:
+	[
+		"addon.txt",
+	]
+}
