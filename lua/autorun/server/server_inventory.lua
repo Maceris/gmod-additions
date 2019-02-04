@@ -5,7 +5,6 @@ Cached network strings
 util.AddNetworkString( "GetInventory" )
 util.AddNetworkString( "SpawnWeapon" )
 util.AddNetworkString( "ErrInvalidWeapName" )
-util.AddNetworkString( "moat.verify" )
 
 --[[----------------------------------------------------------------------------
 Message callbacks
