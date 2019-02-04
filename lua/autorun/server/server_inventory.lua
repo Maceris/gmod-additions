@@ -2,22 +2,12 @@
 Cached network strings
 ------------------------------------------------------------------------------]]
 
-util.AddNetworkString( "GetInventory" )
 util.AddNetworkString( "SpawnWeapon" )
 util.AddNetworkString( "ErrInvalidWeapName" )
 
 --[[----------------------------------------------------------------------------
 Message callbacks
 ------------------------------------------------------------------------------]]
-
-function Msg_Rec_GetInventory (len, pl) 
-	pl:ChatPrint("Requested inventory!" )
-	local fn = pl:SteamID64() .. ".txt"
-	local data = file.Read(fn, "DATA" ) -- Read the file
-	if not data then 
-		file.Write( fn, " " )
-	end -- File doesn't exist
-end
 
 function Msg_Rec_SpawnWeapon (len, pl) 
 	local pla = player.GetBySteamID64 (pl:SteamID64())
@@ -54,5 +44,4 @@ end
 --[[----------------------------------------------------------------------------
 Net message handlers
 ------------------------------------------------------------------------------]]
-net.Receive( "GetInventory", function (len, pl) Msg_Rec_GetInventory(len, pl) end )
 net.Receive( "SpawnWeapon", function (len, pl) Msg_Rec_SpawnWeapon(len, pl) end )

@@ -1,15 +1,6 @@
-function RequestInventory ()
-	net.Start( "GetInventory" )
-	net.SendToServer()
-end
-
-RequestInventory()
-
 --[[----------------------------------------------------------------------------
 Debug console commands
 ------------------------------------------------------------------------------]]
-concommand.Add("DBG_req_inv", function() RequestInventory()
-end)
 
 concommand.Add("DBG_spawn_weapon", function(ply, cmd, args) 
 	net.Start( "SpawnWeapon" )
