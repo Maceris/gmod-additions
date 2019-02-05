@@ -269,8 +269,6 @@ _obj_ = see ObjectFactory(uid)
 function DrawSmokeText(intensity, text, font, x, y, color, color2, _obj_)
     color2 = color2 or Color(112, 112, 112, 100)
 	intensity = intensity or 0.4
-
-    draw.SimpleText(text, font, x, y, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 	
 	local tw, th = m_GetTextSize(text, font)
 	
@@ -292,7 +290,18 @@ function DrawSmokeText(intensity, text, font, x, y, color, color2, _obj_)
 			_obj_.smokes[i].rot = math.Rand(0, 90)
 		end
 	end
-	for i=1, _obj_.smokes.size+1 do
+	local z_ind = math.random(_obj_.smokes.size+1)
+	
+	for i=1, z_ind do
+		draw.NoTexture()
+		surface.SetDrawColor( color2 )
+		surface.DrawTexturedRectRotated(_obj_.smokes[i].x, _obj_.smokes[i].y, 
+			_obj_.smokes[i].radius, _obj_.smokes[i].radius, _obj_.smokes[i].rot) 
+	end
+	
+	draw.SimpleText(text, font, x, y, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+	
+	for i=z_ind, _obj_.smokes.size+1 do
 		draw.NoTexture()
 		surface.SetDrawColor( color2 )
 		surface.DrawTexturedRectRotated(_obj_.smokes[i].x, _obj_.smokes[i].y, 
@@ -311,8 +320,6 @@ color = text color
 _obj_ = see ObjectFactory(uid)
 --]]
 function DrawRainText(text, font, x, y, color, _obj_)
-
-    draw.SimpleText(text, font, x, y, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 	
 	local tw, th = m_GetTextSize(text, font)
 	
@@ -348,18 +355,21 @@ function DrawRainText(text, font, x, y, color, _obj_)
 		end
 	end
 	
-	for i=1, _obj_.clouds.size+1 do
-		draw.NoTexture()
-		surface.SetDrawColor( Color(112, 112, 112, 90) )
-		surface.DrawTexturedRectRotated(_obj_.clouds[i].x, _obj_.clouds[i].y, 
-			_obj_.clouds[i].radius, _obj_.clouds[i].radius, _obj_.clouds[i].rot) 
-	end
 	for i=1, _obj_.drops.size+1 do
 		draw.NoTexture()
 		surface.SetDrawColor( Color(38, 121, 255, 150) )
 		surface.DrawTexturedRectRotated(_obj_.drops[i].x, _obj_.drops[i].y,
 			_obj_.drops[i].radius, _obj_.drops[i].radius, _obj_.drops[i].rot) 
 	end
+	
+	for i=1, _obj_.clouds.size+1 do
+		draw.NoTexture()
+		surface.SetDrawColor( Color(112, 112, 112, 90) )
+		surface.DrawTexturedRectRotated(_obj_.clouds[i].x, _obj_.clouds[i].y, 
+			_obj_.clouds[i].radius, _obj_.clouds[i].radius, _obj_.clouds[i].rot) 
+	end
+	
+	draw.SimpleText(text, font, x, y, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 end
 
 --[[
@@ -376,7 +386,7 @@ _obj_ = see ObjectFactory(uid)
 function DrawBonfireText(intensity, text, font, x, y, color, _obj_)
 	intensity = intensity or 0.84
 
-    draw.SimpleText(text, font, x, y, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+    
 	
 	local tw, th = m_GetTextSize(text, font)
 	
@@ -413,6 +423,7 @@ function DrawBonfireText(intensity, text, font, x, y, color, _obj_)
 		surface.DrawTexturedRectRotated(_obj_.fire[i].x, _obj_.fire[i].y, 
 			_obj_.fire[i].radius, _obj_.fire[i].radius, _obj_.fire[i].rot) 
 	end
+	draw.SimpleText(text, font, x, y, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
 end
 
 --[[----------------------------------------------------------------------------
@@ -437,7 +448,7 @@ function m_DrawEffectExamples()
 	y = y + 50
 	DrawRainText("RAIN TEXT", font, x, y, Color(255, 0, 0), ObjectFactory(4))
 	y = y + 50
-	DrawBonfireText(0.7, "BONFIRE TEXT", font, x, y, Color(0, 0, 255), ObjectFactory(5))
+	DrawBonfireText(0.7, "BONFIRE TEXT", font, x, y, Color(255, 0, 0), ObjectFactory(5))
 	
 end
 hook.Add("HUDPaint", "m_TextEffectsExample", m_DrawEffectExamples)
