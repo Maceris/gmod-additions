@@ -15,6 +15,8 @@ You can close by pressing 'i' again or clicking the close button.
 
 Based on https://github.com/moatato/moat-texteffects
 
+[An example video of the effects can be found here.](https://i.imgur.com/E4rDn3h.mp4)
+
 ---
 ## __Text Effects Included:__
 * Dollars bouncing around over text
