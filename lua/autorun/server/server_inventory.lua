@@ -27,7 +27,13 @@ Utility functions
 function ForceWeapon (ply, weapon_name)
 	local slot = weapons.Get(weapon_name).Kind
 	RemoveWeapon(ply, slot)
-	ply:Give(weapon_name)
+	local weap_given = ply:Give(weapon_name)
+	
+	if (IsValid(weap_given)) then
+		local ammo_type = weap_given:GetPrimaryAmmoType()
+		local clip_sz = weap_given:GetMaxClip1()
+		ply:GiveAmmo(clip_sz * 5, ammo_type)
+	end
 end
 
 function RemoveWeapon (ply, slot)
@@ -36,6 +42,8 @@ function RemoveWeapon (ply, slot)
 	for k, v in pairs( weptbl ) do -- loop through them
 		if v.Kind == slot then
 			ply:StripWeapon(v:GetClass())
+			print(v)
+			ply:RemoveAmmo(1000, v:GetPrimaryAmmoType())
 		end 
 	end
 
